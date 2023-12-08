@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<div class="digart-bg flex absolute top-0 level-0">
+  <div [ngStyle]="{'min-width': leftSectionWidth+'vw'}" class="left-section pt-8 flex flex-col justify-center items-center relative">
+    <div class="overlay"></div>
+    <div [style.transform]="'scale('+ leftSectionScale +')'" class="content">
+      <app-rome-card></app-rome-card>
+    <p class="text-[20px] text-white font-semibold mt-8">
+      {{firstArtVotes}} votes accounted for Rome on Fire
+    </p>
+    </div>
+  </div>
+  <div [ngStyle]="{'margin-left': separatorOffset.toString()+'vw'}" class="vote-separator absolute top-0 level-2 flex flex-col justify-center items-center">
+    
+    <h1 class="vote-count">
+      {{firstArtVotes}} - {{secondArtVotes}}
+    </h1>
+    <p class="total-count">
+      total votes: {{totalCount}}
+    </p>
+  </div>
+  <div [ngStyle]="{'min-width': rightSectionWidth+'vw'}" class="right-section relative pt-8 flex flex-col justify-center items-center">
+    <div class="overlay"></div>
+    <div [style.transform]="'scale('+ rightSectionScale +')'" class="content">
+      <app-athena-card></app-athena-card>
+    <p class="text-[20px] text-white font-semibold mt-8">
+      {{secondArtVotes}} votes accounted for Athena Heaven
+    </p>
+    </div>
+  </div>
+</div>

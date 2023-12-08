@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+// :root {
+//     --foreground-rgb: 0, 0, 0;
+//     --background-start-rgb: 214, 219, 220;
+//     --background-end-rgb: 255, 255, 255;
+//   }
+  
+//   @media (prefers-color-scheme: dark) {
+//     :root {
+//       --foreground-rgb: 255, 255, 255;
+//       --background-start-rgb: 0, 0, 0;
+//       --background-end-rgb: 0, 0, 0;
+//     }
+//   }
+body {
+    font-family: 'Chakra Petch', sans-serif;
+    overflow: hidden;
+    color: rgb(var(--foreground-rgb));
+    transition: all ease-in-out 0.5s;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))
+      )
+      rgb(var(--background-start-rgb));
+  }
+  .digart-bg{
+    background: linear-gradient(85deg, #042739 0%, #123040 100%);
+    height: 100vh;
+    width: 100vw;
+}
+.left-section{
+    background: url('assets/rome-bg.png');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 50vw;
+    transition: all ease-in-out 0.5s;
+}
+.right-section{
+    background: url('assets/athena-bg.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 50vw;
+    transition: all 0.5s ease-in-out ;
+}
+.athena-header{
+    border-radius: 30px 30px 0px 0px;
+    background: linear-gradient(90deg, rgba(44, 74, 82, 0.70) -0.44%, rgba(10, 107, 113, 0.70) 16.25%, rgba(38, 149, 142, 0.70) 30.79%, rgba(70, 183, 179, 0.70) 49%, rgba(59, 174, 169, 0.70) 65.61%, rgba(7, 95, 96, 0.70) 84.91%, rgba(35, 65, 67, 0.70) 99.48%);
+  
+    backdrop-filter: blur(5.150000095367432px);
+  }
+  .rome-header{
+    border-radius: 30px 30px 0px 0px;
+    background: linear-gradient(90deg, rgba(37, 43, 41, 0.70) -0.44%, rgba(91, 60, 26, 0.70) 21.16%, rgba(204, 117, 58, 0.70) 34.2%, rgba(241, 173, 102, 0.70) 50.92%, rgba(204, 117, 58, 0.70) 65.61%, rgba(91, 60, 26, 0.70) 80.85%, rgba(37, 43, 41, 0.70) 99.48%);
+    backdrop-filter: blur(5.150000095367432px);
+  }
+.level-0{
+    z-index: 0 !important;
+  }
+  .level-1{
+    z-index: 1 !important;
+  }
+  .level-2{
+    z-index: 2 !important;
+  }
+  .vote-separator{
+    background-image: url("assets/vote-separator.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 8.5vw;
+    transition: all 0.5s ease-in-out;
+  }
+  .vote-count{
+    color: #466B69;
+    font-size: 48px;
+    font-weight: 900;
+  }
+  .total-count{
+    color: #55C183;
+    font-weight: 700;
+  }
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.2);
+  backdrop-filter: blur(6px);
+}
