@@ -29,6 +29,7 @@ pipeline {
             stage('Build the result microservice'){
                 steps{
                     script {
+                        echo "Node.js Home: ${NODEJS_HOME}"
                         dir('code/voting-ui') {
                             sh '${NODEJS_HOME}/bin/npm install'
                             sh '${NODEJS_HOME}/bin/npm run build'
