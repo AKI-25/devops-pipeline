@@ -113,7 +113,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/result-db') {
-                            
+                            dockerResultDBImage = docker.build("result-db:latest")
                         }
                     }
                 }
@@ -122,7 +122,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/voting-db') {
-                            
+                            dockerVotingDBImage = docker.build("voting-db:latest")
                         }
                     }
                 }
