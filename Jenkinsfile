@@ -130,11 +130,14 @@ pipeline {
         }
     }
     stage('Push Images') {
-        parallel {
-            environment {
+        environment {
                registryCredential = 'DockerhubCredentials'
             }
+        parallel {
             stage('Push the voting image'){
+                environment {
+                    registryCredential = 'DockerhubCredentials'
+                }
                 steps{
                     script {
                         dir('code/voting-ui') {
