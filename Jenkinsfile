@@ -29,8 +29,7 @@ pipeline {
             stage('Build the result microservice'){
                 steps{
                     script {
-                        echo "Node.js Home: ${NODEJS_HOME}"
-                        dir('code/voting-ui') {
+                        dir('code/result-ui') {
                             sh '${NODEJS_HOME}/bin/npm install'
                             sh '${NODEJS_HOME}/bin/npm run build'
                         }
@@ -42,6 +41,38 @@ pipeline {
                     script {
                         dir('code/worker') {
                             sh '${GO_HOME}/bin/go build -o worker ./cmd/worker/'
+                        }
+                    }
+                }
+            }
+        }
+    }
+    stage('Test code') {
+        parallel {
+            stage('Testing the voting microservice'){
+                steps{
+                    script {
+                        dir('code/voting-ui') {
+
+                        }
+                    }
+                }
+
+            }
+            stage('Testing the result microservice'){
+                steps{
+                    script {
+                        dir('code/voting-ui') {
+                            
+                        }
+                    }
+                }
+            }
+            stage('Testing the worker microservice'){
+                steps{
+                    script {
+                        dir('code/worker') {
+                            
                         }
                     }
                 }
