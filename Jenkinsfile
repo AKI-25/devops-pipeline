@@ -16,8 +16,10 @@ pipeline {
             stage('Build the voting microservice'){
                 steps{
                     script {
-                        sh 'cd code/voting-ui '
-                        sh 'ls'
+                        dir('code/voting-ui') {
+                            sh 'npm install'
+                            sh 'npm run build'
+                        }
                     }
                 }
 
@@ -26,7 +28,8 @@ pipeline {
                 steps{
                     script {
                         dir('code/voting-ui') {
-                            sh 'ls'
+                            sh 'npm install'
+                            sh 'npm run build'
                         }
                     }
                 }
@@ -34,8 +37,9 @@ pipeline {
             stage('Build the worker microservice'){
                 steps{
                     script {
-                        sh 'cd ./code/worker'
-                        sh 'ls'
+                        dir('code/worker') {
+                            sh 'go build -o worker ./cmd/worker/'
+                        }
                     }
                 }
             }
