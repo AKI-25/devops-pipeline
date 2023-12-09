@@ -130,10 +130,10 @@ pipeline {
         }
     }
     stage('Push Images') {
-        environment {
-               registryCredential = 'DockerhubCredentials'
-        }
         parallel {
+            environment {
+               registryCredential = 'DockerhubCredentials'
+            }
             stage('Push the voting image'){
                 steps{
                     script {
@@ -146,7 +146,7 @@ pipeline {
                 }
 
             }
-            stage('Building the result image'){
+            stage('Push the result image'){
                 steps{
                     script {
                         dir('code/result-ui') {
@@ -157,7 +157,7 @@ pipeline {
                     }
                 }
             }
-            stage('Building the worker image'){
+            stage('Push the worker image'){
                 steps{
                     script {
                         dir('code/worker') {
@@ -168,7 +168,7 @@ pipeline {
                     }
                 }
             }
-            stage('Building the vote database image'){
+            stage('Push the vote database image'){
                 steps{
                     script {
                         dir('code/result-db') {
@@ -179,7 +179,7 @@ pipeline {
                     }
                 }
             }
-            stage('Building the result database image'){
+            stage('Push the result database image'){
                 steps{
                     script {
                         dir('code/voting-db') {

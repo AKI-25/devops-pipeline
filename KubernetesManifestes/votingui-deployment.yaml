@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: voting-ui
-        image: your-voting-ui-image:tag
+        image: abdelkefiismail/voting-ui:latest
         ports:
-        - containerPort: 80
+        - containerPort: 3000
