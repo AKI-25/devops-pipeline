@@ -15,15 +15,25 @@ pipeline {
         parallel {
             stage('Build the voting microservice'){
                 steps{
-                    ls
+                    script {
+                        sh 'ls'
+                    }
                 }
 
             }
             stage('Build the result microservice'){
-
+                steps{
+                    script {
+                        sh 'ls'
+                    }
+                }
             }
             stage('Build the worker microservice'){
-
+                steps{
+                    script {
+                        sh 'ls'
+                    }
+                }
             }
         }
     }
