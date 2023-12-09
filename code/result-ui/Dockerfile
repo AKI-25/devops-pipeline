@@ -1,11 +1,13 @@
 FROM node:18 AS base
 RUN npm install -g @angular/cli
 
+
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json /app/
 
 RUN npm install
+RUN npm i --save-dev @types/async
 
 FROM base AS builder
 WORKDIR /app

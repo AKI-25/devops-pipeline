@@ -8,7 +8,7 @@ import { dirname, join, resolve } from 'path';
 import {Server} from 'socket.io';
 // For method-override
 import methodOverride from 'method-override';
-
+import { createServer } from 'http';
 // For async
 import async from 'async';
 
@@ -19,7 +19,7 @@ export function app(): any {
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
   const browserDistFolder = resolve(serverDistFolder, '../browser');
   const indexHtml = join(serverDistFolder, 'index.server.html');
-  const httpServer = require('http').Server(server); // Create an HTTP server
+  const httpServer = createServer(server); // Create an HTTP server
   const io = new Server(httpServer); // Attach Socket.io to the HTTP server
   console.log(io)
   io.on('connection', (socket: any) => {
