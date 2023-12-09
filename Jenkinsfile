@@ -17,6 +17,7 @@ pipeline {
                 steps{
                     script {
                         sh 'cd code/voting-ui '
+                        sh 'ls'
                     }
                 }
 
@@ -25,6 +26,7 @@ pipeline {
                 steps{
                     script {
                         sh 'cd code/result-ui '
+                        sh 'ls'
                     }
                 }
             }
@@ -32,6 +34,7 @@ pipeline {
                 steps{
                     script {
                         sh 'cd code/worker'
+                        sh 'ls'
                     }
                 }
             }
