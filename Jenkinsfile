@@ -25,7 +25,7 @@ pipeline {
             stage('Build the result microservice'){
                 steps{
                     script {
-                        sh 'cd code/result-ui '
+                        sh 'cd ./code'
                         sh 'ls'
                     }
                 }
@@ -33,7 +33,7 @@ pipeline {
             stage('Build the worker microservice'){
                 steps{
                     script {
-                        sh 'cd code/worker'
+                        sh 'cd ./code/worker'
                         sh 'ls'
                     }
                 }
