@@ -3,7 +3,7 @@ pipeline {
     dockerimagename = "abdelkefiismail/book-saw"
     dockerimagetag = "v1"
     dockerImage = ""
-    NODEJS_HOME = tool 'Node.js'
+    NODEJS_HOME = tool 'NodeJS'
     GO_HOME = tool 'Go'
   }
   agent any
