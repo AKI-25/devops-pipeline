@@ -23,20 +23,20 @@ services:
     image: vote-worker
     ports: 
       - "8080:8080"
-    networks:
-      - app-network
     depends_on:
       - votingDB
       - resultDB
+    networks:
+      - app-network
 
   resultUI:
     image: result-ui
     ports: 
       - "4000:4000"
-    networks:
-      - app-network
     depends_on:
       - worker
+    networks:
+      - app-network
   
   resultDB:
     image: "postgres"

@@ -18,7 +18,7 @@ type Vote struct {
 }
 
 func main() {
-    db := openDBConnection("postgres://postgres:postgres@resultDB:5432/postgres?sslmode=disable")
+    db := openDBConnection("postgres://postgres:postgres@resultDB:5432/votes?sslmode=disable")
     redisClient := openRedisConnection("votingDB:6379")
 
     keepAliveQuery := "SELECT 1"
@@ -58,7 +58,7 @@ if err != nil {
     _, err := db.Exec(keepAliveQuery)
     if err != nil {
         log.Println("Reconnecting DB")
-        db = openDBConnection("postgres://postgres:postgres@resultDB:5432/postgres?sslmode=disable")
+        db = openDBConnection("postgres://postgres:postgres@resultDB:5432/votes?sslmode=disable")
     }
     continue
 }
@@ -77,7 +77,7 @@ if err != nil {
     _, err := db.Exec(keepAliveQuery)
     if err != nil {
         log.Println("Reconnecting DB")
-        db = openDBConnection("postgres://postgres:postgres@resultDB:5432/postgres?sslmode=disable")
+        db = openDBConnection("postgres://postgres:postgres@resultDB:5432/votes?sslmode=disable")
     }
     continue
 }

@@ -21,7 +21,6 @@ export function app(): any {
   const indexHtml = join(serverDistFolder, 'index.server.html');
   const httpServer = createServer(server); // Create an HTTP server
   const io = new Server(httpServer); // Attach Socket.io to the HTTP server
-  console.log(io)
   io.on('connection', (socket: any) => {
     console.log('A user connected to the socket');
 
@@ -51,7 +50,7 @@ export function app(): any {
   
   const pool = new Pool({
     user: 'postgres',
-    host: 'localhost',
+    host: 'resultDB',
     database: 'votes',
     password: 'postgres',
     port: 5432,
@@ -79,8 +78,8 @@ export function app(): any {
       if (err) {
         console.error("Error performing query: " + err);
       } else {
-        const message = `{ "art1" : ${result.rows[0].art1}, "art2" : ${result.rows[0].art2}}`;
-
+        const message = `{ "art1" : ${result.rows[0].art2}, "art2" : ${result.rows[0].art1}}`;
+        
 
         // Emit the message to all connected clients
         io.emit('voteUpdate', message);

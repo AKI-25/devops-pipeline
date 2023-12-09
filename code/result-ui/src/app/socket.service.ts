@@ -15,7 +15,7 @@ export class SocketService {
         reconnectionDelay: 5000,
         reconnectionAttempts: 5,
       });
-      this.on$('connection').subscribe(console.log);
+      this.on$('connection').subscribe();
     });
     
   }
