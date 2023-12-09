@@ -25,8 +25,9 @@ pipeline {
             stage('Build the result microservice'){
                 steps{
                     script {
-                        sh 'cd ./code'
-                        sh 'ls'
+                        dir('code/voting-ui') {
+                            sh 'ls'
+                        }
                     }
                 }
             }
