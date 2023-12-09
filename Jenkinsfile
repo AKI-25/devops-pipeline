@@ -141,7 +141,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/voting-ui') {
-                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                            docker.withRegistry( '', registryCredential ) {
                                 dockerVotingImage.push('latest')
                             }
                         }
@@ -153,7 +153,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/result-ui') {
-                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                            docker.withRegistry( '', registryCredential ) {
                                 dockerResultImage.push('latest')
                             }
                         }
@@ -164,7 +164,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/worker') {
-                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                            docker.withRegistry( '', registryCredential ) {
                                 dockerWorkerImage.push('latest')
                             }
                         }
@@ -175,7 +175,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/result-db') {
-                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                            docker.withRegistry( '', registryCredential ) {
                                 dockerVotingDBImage.push('latest')
                             }
                         }
@@ -186,7 +186,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/voting-db') {
-                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                            docker.withRegistry( '', registryCredential ) {
                                 dockerResultDBImage.push('latest')
                             }
                         }
