@@ -4,7 +4,7 @@ pipeline {
     dockerimagetag = "v1"
     dockerImage = ""
     NODEJS_HOME = tool 'NodeJS'
-    GO_HOME = tool 'Go'
+    GO_HOME = tool 'GO'
   }
   agent any
   stages {
