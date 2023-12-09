@@ -40,7 +40,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/worker') {
-                            sh '${GO_HOME}/bin/go -o worker ./cmd/worker/'
+                            sh '${GO_HOME}/bin/go build -o worker ./cmd/worker/'
                         }
                     }
                 }
