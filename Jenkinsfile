@@ -85,7 +85,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/voting-ui') {
-                            dockerVotingImage = docker.build("voting-ui:latest")
+                            dockerVotingImage = docker.build("abdelkefiismail/voting-ui:latest")
                         }
                     }
                 }
@@ -95,7 +95,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/result-ui') {
-                            dockerResultImage = docker.build("result-ui:latest")
+                            dockerResultImage = docker.build("abdelkefiismail/result-ui:latest")
                         }
                     }
                 }
@@ -104,7 +104,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/worker') {
-                            dockerWorkerImage = docker.build("vote-worker:latest")
+                            dockerWorkerImage = docker.build("abdelkefiismail/vote-worker:latest")
                         }
                     }
                 }
@@ -113,7 +113,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/result-db') {
-                            dockerResultDBImage = docker.build("result-db:latest")
+                            dockerResultDBImage = docker.build("abdelkefiismail/result-db:latest")
                         }
                     }
                 }
@@ -122,7 +122,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/voting-db') {
-                            dockerVotingDBImage = docker.build("voting-db:latest")
+                            dockerVotingDBImage = docker.build("abdelkefiismail/voting-db:latest")
                         }
                     }
                 }
