@@ -3,6 +3,8 @@ pipeline {
     dockerimagename = "abdelkefiismail/book-saw"
     dockerimagetag = "v1"
     dockerImage = ""
+    NODEJS_HOME = tool 'Node.js'
+    GO_HOME = tool 'Go'
   }
   agent any
   stages {
@@ -17,8 +19,8 @@ pipeline {
                 steps{
                     script {
                         dir('code/voting-ui') {
-                            sh 'npm install'
-                            sh 'npm run build'
+                            sh '${NODEJS_HOME}/bin/npm install'
+                            sh '${NODEJS_HOME}/bin/npm run build'
                         }
                     }
                 }
@@ -28,8 +30,8 @@ pipeline {
                 steps{
                     script {
                         dir('code/voting-ui') {
-                            sh 'npm install'
-                            sh 'npm run build'
+                            sh '${NODEJS_HOME}/bin/npm install'
+                            sh '${NODEJS_HOME}/bin/npm run build'
                         }
                     }
                 }
@@ -38,7 +40,7 @@ pipeline {
                 steps{
                     script {
                         dir('code/worker') {
-                            sh 'go build -o worker ./cmd/worker/'
+                            sh '${GO_HOME}/bin/go -o worker ./cmd/worker/'
                         }
                     }
                 }
