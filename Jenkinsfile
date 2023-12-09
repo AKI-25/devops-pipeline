@@ -62,7 +62,7 @@ pipeline {
             stage('Testing the result microservice'){
                 steps{
                     script {
-                        dir('code/voting-ui') {
+                        dir('code/result-ui') {
                             
                         }
                     }
@@ -72,6 +72,56 @@ pipeline {
                 steps{
                     script {
                         dir('code/worker') {
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    stage('Build Images') {
+        parallel {
+            stage('Build the voting image'){
+                steps{
+                    script {
+                        dir('code/voting-ui') {
+                            dockerVotingImage = docker.build("voting-ui:latest")
+                        }
+                    }
+                }
+
+            }
+            stage('Building the result image'){
+                steps{
+                    script {
+                        dir('code/result-ui') {
+                            dockerResultImage = docker.build("result-ui:latest")
+                        }
+                    }
+                }
+            }
+            stage('Building the worker image'){
+                steps{
+                    script {
+                        dir('code/worker') {
+                            dockerWorkerImage = docker.build("vote-worker:latest")
+                        }
+                    }
+                }
+            }
+            stage('Building the vote database image'){
+                steps{
+                    script {
+                        dir('code/result-db') {
+                            
+                        }
+                    }
+                }
+            }
+            stage('Building the result database image'){
+                steps{
+                    script {
+                        dir('code/voting-db') {
                             
                         }
                     }
