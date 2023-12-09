@@ -1,15 +1,16 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import bootstrap from './src/main.server';
-const methodOverride = require('method-override');
 import express  from 'express';
 import { Pool } from 'pg'
 import { fileURLToPath } from 'url';
 import { dirname, join, resolve } from 'path';
 import {Server} from 'socket.io';
+// For method-override
+import methodOverride from 'method-override';
 
-
-const async = require('async');
+// For async
+import async from 'async';
 
 
 // The Express app is exported so that it can be used by serverless Functions.
