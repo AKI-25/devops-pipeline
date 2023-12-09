@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voting-db
+  template:
+    metadata:
+      labels:
+        app: voting-db
+    spec:
+      containers:
+      - name: voting-db
+        image: redis:latest # Use the official Redis image
+        ports:
+        - containerPort: 6379 # Redis default port

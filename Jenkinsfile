@@ -129,33 +129,68 @@ pipeline {
             }
         }
     }
-    // stage('Pushing Image') {
-    //   environment {
-    //            registryCredential = 'DockerhubCredentials'
-    //        }
-    //   steps{
-    //     script {
-    //       docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-    //         dockerImage.push dockerimagetag
-    //       }
-    //     }
-    //   }
-    // }
-    // stage('Run Ansible Playbook') {
-    //   steps {
-    //     script {      
-    //       // run the ansible playbook 
-    //       sh 'ansible-playbook AnsiblePlaybooks/kubernetes-environment-playbook.yaml'
-    //     }
-    //   }
-    // }
+    stage('Push Images') {
+        environment {
+               registryCredential = 'DockerhubCredentials'
+        }
+        parallel {
+            stage('Push the voting image'){
+                steps{
+                    script {
+                        dir('code/voting-ui') {
+                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                                dockerVotingImage.push('latest')
+                            }
+                        }
+                    }
+                }
 
-    // stage('Deploying Booksaw Application to Kubernetes') {
-    //   steps {
-    //     script {
-    //       sh 'kubectl set image deployment/booksaw-deployment booksaw-web-server=${dockerimagename}:${dockerimagetag}'
-    //     }
-    //   }
-    // }
+            }
+            stage('Building the result image'){
+                steps{
+                    script {
+                        dir('code/result-ui') {
+                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                                dockerResultImage.push('latest')
+                            }
+                        }
+                    }
+                }
+            }
+            stage('Building the worker image'){
+                steps{
+                    script {
+                        dir('code/worker') {
+                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                                dockerWorkerImage.push('latest')
+                            }
+                        }
+                    }
+                }
+            }
+            stage('Building the vote database image'){
+                steps{
+                    script {
+                        dir('code/result-db') {
+                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                                dockerVotingDBImage.push('latest')
+                            }
+                        }
+                    }
+                }
+            }
+            stage('Building the result database image'){
+                steps{
+                    script {
+                        dir('code/voting-db') {
+                            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                                dockerResultDBImage.push('latest')
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
   }
 }

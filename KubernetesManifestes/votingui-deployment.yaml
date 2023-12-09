@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voting-ui
+  template:
+    metadata:
+      labels:
+        app: voting-ui
+    spec:
+      containers:
+      - name: voting-ui
+        image: your-voting-ui-image:tag
+        ports:
+        - containerPort: 80

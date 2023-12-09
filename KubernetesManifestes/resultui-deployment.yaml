@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result-ui
+  template:
+    metadata:
+      labels:
+        app: result-ui
+    spec:
+      containers:
+      - name: result-ui
+        image: your-result-ui-image:tag
+        ports:
+        - containerPort: 80
