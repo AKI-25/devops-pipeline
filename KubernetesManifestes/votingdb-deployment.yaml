@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: voting-db
-        image: abdelkefiismail/result-db:latest # Use the official Redis image
+        image: abdelkefiismail/voting-db:latest # Use the official Redis image
         ports:
         - containerPort: 6379 # Redis default port

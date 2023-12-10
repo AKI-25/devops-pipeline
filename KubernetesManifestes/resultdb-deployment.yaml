@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: voting-db
+  name: result-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: voting-db
+      app: result-db
   template:
     metadata:
       labels:
-        app: voting-db
+        app: result-db
     spec:
       containers:
-      - name: voting-db
-        image: your-voting-db-image:tag
+      - name: result-db
+        image: abdelkefiismail/result-db:latest
         ports:
         - containerPort: 5432 # Assuming PostgreSQL for example
