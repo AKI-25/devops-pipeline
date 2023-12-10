@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: vote-worker
-        image: your-vote-worker-image:tag
+        image: abdelkefiismail/vote-worker:latest
