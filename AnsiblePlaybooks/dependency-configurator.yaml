@@ -41,10 +41,16 @@
       command: /tmp/get-helm-3
       when: "ansible_distribution_release == 'xenial'"  # Adjust based on your Ubuntu release
 
-    - name: Update package cache (apt)
-      ansible.builtin.apt:
+    - name: Add Trivy APT repository key
+      ansible.builtin.apt_key:
+        url: https://aquasecurity.github.io/trivy-repo/deb/public.key
+        state: present
+
+    - name: Add Trivy APT repository
+      ansible.builtin.apt_repository:
+        repo: deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -cs) main
+        state: present
         update_cache: yes
-      when: ansible_pkg_mgr == 'apt'
 
     - name: Install Trivy
       ansible.builtin.package:
