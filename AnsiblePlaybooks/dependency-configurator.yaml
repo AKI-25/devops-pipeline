@@ -1,6 +1,5 @@
 - name: Dependency Configurator
-  hosts: your_target_machine
-  become: true  # Run tasks with elevated privileges (sudo)
+  hosts: localhost
 
   tasks:
     - name: Install prerequisites
