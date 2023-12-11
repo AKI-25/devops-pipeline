@@ -46,13 +46,13 @@
 
     - name: Add Trivy APT repository key
       ansible.builtin.shell:
-        cmd: "wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -"
+        cmd: "wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -"
         creates: /etc/apt/trivy_key_added  # Check if the key has been added to avoid unnecessary execution
       register: trivy_key_result
 
     - name: Add Trivy APT repository
       ansible.builtin.shell:
-        cmd: "echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list"
+        cmd: "echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | tee -a /etc/apt/sources.list.d/trivy.list"
         creates: /etc/apt/sources.list.d/trivy.list  # Check if the repository has been added to avoid unnecessary execution
       when: trivy_key_result.changed
 
