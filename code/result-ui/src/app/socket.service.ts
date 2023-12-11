@@ -10,7 +10,7 @@ export class SocketService {
 
   constructor(private readonly ngZone: NgZone) {
     this.ngZone.runOutsideAngular(() => {
-      this.socket = io('http://localhost:4000/', {
+      this.socket = io('http://result-ui-service:4000/', {
         reconnection: true,
         reconnectionDelay: 5000,
         reconnectionAttempts: 5,

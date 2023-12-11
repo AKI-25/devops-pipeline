@@ -16,4 +16,4 @@ spec:
       - name: result-ui
         image: abdelkefiismail/result-ui:latest
         ports:
-        - containerPort: 80
+        - containerPort: 4000

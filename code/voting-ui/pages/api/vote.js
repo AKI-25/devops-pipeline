@@ -1,7 +1,7 @@
 import { createClient } from 'redis';
 import { promisify } from 'util';
 const client = await createClient({
-    url: 'redis://votingDB:6379'
+    url: 'redis://voting-db-service:6379'
 })
     .on('error', err => console.log('Redis Client Error', err))
     .connect();

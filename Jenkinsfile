@@ -8,10 +8,15 @@ pipeline {
   }
   agent any
   stages {
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/AKI-25/devops-pipeline.git'
-      }
+    stage('Installing Dependencies') {
+        steps {
+            dir('AnsiblePlaybooks') {
+                ansiblePlaybook(
+                    colorized: true,
+                    playbook: 'dependency-configurator.yaml',
+                )
+            }
+        }
     }
     stage('Build code') {
         parallel {
@@ -24,7 +29,6 @@ pipeline {
                         }
                     }
                 }
-
             }
             stage('Build the result microservice'){
                 steps{
@@ -190,6 +194,22 @@ pipeline {
                     }
                 }
             }
+        }
+    }
+    stage('Deploying Application') {
+        steps{
+            script {
+                dir('KubernetesManifests') {
+                    sh 'kubectl replace -f ./*'
+                }
+            }
+        }
+    }
+    stage('Deploying Monitoring Solution') {
+        steps {
+            script {
+                sh 'helm install prometheus prometheus-community/kube-prometheus-stack'
+            } 
         }
     }
   }

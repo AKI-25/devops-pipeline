@@ -50,7 +50,7 @@ export function app(): any {
   
   const pool = new Pool({
     user: 'postgres',
-    host: 'resultDB',
+    host: 'result-db-service',
     database: 'votes',
     password: 'postgres',
     port: 5432,

@@ -18,8 +18,8 @@ type Vote struct {
 }
 
 func main() {
-    db := openDBConnection("postgres://postgres:postgres@resultDB:5432/votes?sslmode=disable")
-    redisClient := openRedisConnection("votingDB:6379")
+    db := openDBConnection("postgres://postgres:postgres@result-db-service:5432/votes?sslmode=disable")
+    redisClient := openRedisConnection("voting-db-service:6379")
 
     keepAliveQuery := "SELECT 1"
 
@@ -41,7 +41,7 @@ func main() {
         // Reconnect to Redis if down
         if _, err := redisClient.Ping(redisClient.Context()).Result(); err != nil {
             fmt.Println("Reconnecting Redis")
-            redisClient = openRedisConnection("votingDB:6379")
+            redisClient = openRedisConnection("voting-db-service:6379")
         }
 // Retrieve values from Redis keys
 jsonValueAthena, err := redisClient.Get(redisClient.Context(), "votes:Athena").Result()
@@ -58,7 +58,7 @@ if err != nil {
     _, err := db.Exec(keepAliveQuery)
     if err != nil {
         log.Println("Reconnecting DB")
-        db = openDBConnection("postgres://postgres:postgres@resultDB:5432/votes?sslmode=disable")
+        db = openDBConnection("postgres://postgres:postgres@result-db-service:5432/votes?sslmode=disable")
     }
     continue
 }
@@ -77,7 +77,7 @@ if err != nil {
     _, err := db.Exec(keepAliveQuery)
     if err != nil {
         log.Println("Reconnecting DB")
-        db = openDBConnection("postgres://postgres:postgres@resultDB:5432/votes?sslmode=disable")
+        db = openDBConnection("postgres://postgres:postgres@result-db-service:5432/votes?sslmode=disable")
     }
     continue
 }

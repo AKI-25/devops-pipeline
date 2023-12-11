@@ -1,0 +1,48 @@
+- name: Dependency Configurator
+  hosts: your_target_machine
+  become: true  # Run tasks with elevated privileges (sudo)
+
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - apt-transport-https
+          - curl
+        state: present
+
+    - name: Add Kubernetes APT repository key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: Add Kubernetes APT repository
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+        filename: kubernetes.list
+
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+
+    - name: Install kubectl
+      apt:
+        name: kubectl
+        state: present
+
+    - name: Install Helm
+      block:
+        - name: Download Helm script
+          get_url:
+            url: https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+            dest: /tmp/get-helm-3
+            mode: +x
+
+        - name: Install Helm
+          command: /tmp/get-helm-3
+      when: "ansible_distribution_release == 'xenial'"  # Adjust based on your Ubuntu release
+
+    - name: Clean up temporary files
+      file:
+        path: /tmp/get-helm-3
+        state: absent
