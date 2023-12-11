@@ -83,6 +83,19 @@ pipeline {
             }
         }
     }
+    stage('Scanning Docker Images') {
+            steps {
+                script {
+                    sh '''
+                        touch trivy_votingui_scan_results && trivy image abdelkefiismail/voting-ui:latest --format json --output ./trivy_votingui_scan_results
+                        touch trivy_resultui_scan_results && trivy image abdelkefiismail/result-ui:latest --format json --output ./trivy_resultui_scan_results
+                        touch trivy_votingdb_scan_results && trivy image abdelkefiismail/voting-db:latest --format json --output ./trivy_votingdb_scan_results
+                        touch trivy_resutdb_scan_results && trivy image abdelkefiismail/result-db:latest --format json --output ./trivy_resultdb_scan_results
+                        touch trivy_worker_scan_results && trivy image abdelkefiismail/vote-worker:latest --format json --output ./trivy_worker_scan_results 
+                    '''
+                }
+            }
+        }        
     stage('Build Images') {
         parallel {
             stage('Build the voting image'){
@@ -133,6 +146,23 @@ pipeline {
             }
         }
     }
+    stage('Docker Bench Scan Docker environment') {
+            steps {
+                script {
+                         sh '''
+                             
+                            rm -rf docker-bench-security
+                            git clone https://github.com/docker/docker-bench-security.git
+                            cd docker-bench-security/
+                            chmod +x docker-bench-security.sh  
+                            touch docker_bench_security_scan_results
+                            ./docker-bench-security.sh > docker_bench_security_scan_results
+                            cat docker_bench_security_scan_results  
+         
+                         '''                        
+                }
+            }
+        }           
     stage('Push Images') {
         environment {
                registryCredential = 'DockerhubCredentials'

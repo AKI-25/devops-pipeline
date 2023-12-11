@@ -37,10 +37,19 @@
             dest: /tmp/get-helm-3
             mode: +x
 
-        - name: Install Helm
-          command: /tmp/get-helm-3
+    - name: Install Helm
+      command: /tmp/get-helm-3
       when: "ansible_distribution_release == 'xenial'"  # Adjust based on your Ubuntu release
 
+    - name: Update package cache (apt)
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install Trivy
+      ansible.builtin.package:
+        name: trivy
+        state: present
     - name: Clean up temporary files
       file:
         path: /tmp/get-helm-3
