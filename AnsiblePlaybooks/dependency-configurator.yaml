@@ -7,6 +7,9 @@
         name:
           - apt-transport-https
           - curl
+          - gnupg
+          - lsb-release
+          - wget
         state: present
 
     - name: Add Kubernetes APT repository key
@@ -41,16 +44,22 @@
       command: /tmp/get-helm-3
       when: "ansible_distribution_release == 'xenial'"  # Adjust based on your Ubuntu release
 
-    - name: Add Trivy APT repository key
-      ansible.builtin.apt_key:
-        url: https://aquasecurity.github.io/trivy-repo/deb/public.key
-        state: present
+        - name: Add Trivy APT repository key
+      ansible.builtin.shell:
+        cmd: "wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -"
+        creates: /etc/apt/trivy_key_added  # Check if the key has been added to avoid unnecessary execution
+      register: trivy_key_result
 
     - name: Add Trivy APT repository
-      ansible.builtin.apt_repository:
-        repo: deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -cs) main
-        state: present
-        update_cache: yes
+      ansible.builtin.shell:
+        cmd: "echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list"
+        creates: /etc/apt/sources.list.d/trivy.list  # Check if the repository has been added to avoid unnecessary execution
+      when: trivy_key_result.changed
+
+    - name: Update APT package cache
+      ansible.builtin.package:
+        name: apt
+        state: latest
 
     - name: Install Trivy
       ansible.builtin.package:
